@@ -25,6 +25,11 @@
     "JS"
   ],
   "system": {
+  "envs": {
+    "server-production": {
+      "baseURL": "https://place-my-order-tg.firebaseapp.com/"
+    }
+  },
     "main": "place-my-order/index.stache!done-autorender",
     "directories": {
       "lib": "src"
@@ -42,6 +47,7 @@
     "npmAlgorithm": "flat"
   },
   "dependencies": {
+    "bit-tabs": "^0.2.0",
     "can": "^2.3.0",
     "can-connect": "^0.3.0",
     "can-ssr": "^0.11.0",
@@ -62,5 +68,26 @@
     "steal-qunit": "^0.1.1",
     "steal-tools": "^0.13.0",
     "testee": "^0.2.4"
-  }
+  },
+ "donejs": {
+   "deploy": {
+     "root": "dist",
+     "services": {
+       "production": {
+         "type": "firebase",
+         "config": {
+           "firebase": "place-my-order-tg",
+           "public": "./dist",
+           "headers": [{
+             "source": "/**",
+             "headers": [{
+               "key": "Access-Control-Allow-Origin",
+               "value": "*"
+             }]
+           }]
+         }
+       }
+     }
+   }
+ }
 }
